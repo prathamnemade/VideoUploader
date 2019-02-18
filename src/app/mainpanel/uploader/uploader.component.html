@@ -1,0 +1,48 @@
+<div><h2>Upload your video here...</h2>
+  <div class="row mainPanel">
+    <div class="col-md-5">
+      <div *ngIf="uploaderService.loader">
+        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+        <br>
+        <div style="    position: absolute;
+        left: 47%;
+        top: 46%;">{{uploaderService.uploadProgress|async|round}}%</div>
+      </div>
+      <div class="upload-btn-wrapper" *ngIf="!uploaderService.loader">
+        <button class="btnn">Click to upload video </button>
+        <input type="file" name="myfile" accept="video/*" (change)="uploaderService.upload($event)" />
+      </div>
+    </div>
+    <div class="col-md-7">
+      <br>
+      <div class="row">
+        <div class="col-md-4">Select Category :</div>
+        <div class="col-md-8">
+          <p-dropdown [options]="categories" [(ngModel)]="uploaderService.selectCategory" placeholder="Select a Category"
+            optionLabel="name" [showClear]="true"></p-dropdown>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4">Description :</div>
+        <div class="col-md-8">
+          <textarea rows="7" cols="50" pInputTextarea autoResize="autoResize" [(ngModel)]="uploaderService.videoDescription"></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-2" style="padding: 0;margin:5px;" (click)="uploaderService.submit()"><button class="btn btn-success btn1"
+            [disabled]="!(uploaderService.selectCategory && uploaderService.videoDescription && uploaderService.toggleSubmit)">Submit</button></div>
+        <div class="col-md-2" style="padding: 0;margin:5px;" *ngIf="uploaderService.loader" (click)="uploaderService.task.pause()"><button
+            class="btn btn-warning btn1">Pause</button></div>
+        <div class="col-md-2" style="padding: 0;margin:5px;" *ngIf="uploaderService.loader" (click)="uploaderService.task.resume()"><button
+            class="btn btn-primary btn1">Start</button></div>
+        <div class="col-md-2" style="padding: 0;margin:5px;" *ngIf="uploaderService.loader" (click)="uploaderService.task.cancel();uploaderService.loader=!uploaderService.loader;uploaderService.toggleSubmit=false;"><button
+            class="btn btn-danger btn1">Cancel</button></div>
+      </div>
+      <div class="row">
+        Uploaded by : Feth from session storage
+      </div>
+    </div>
+  </div>
+</div>

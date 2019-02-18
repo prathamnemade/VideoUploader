@@ -1,0 +1,11 @@
+<h1>Hi sexy,</h1>
+Your Dashboard looks like ....
+
+<div>
+<div class="row">
+  <div class="col-md-3" *ngFor="let item of allData|async">
+    {{item|json}}
+  </div>
+</div>
+</div>
+<app-uploader></app-uploader>
