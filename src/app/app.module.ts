@@ -17,14 +17,16 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { RoundPipe } from './mainpanel/uploader/round.pipe';
 import { AddVideoService } from './mainpanel/uploader/addVideo.service';
 import { FetchAllDataService } from './mainpanel/fetchAllData.service';
+import { LoginComponent } from './mainpanel/login/login.component';
+import { AppRoutingModule } from './app.routes';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,LoginComponent,
     MainpanelComponent,
     UploaderComponent,RoundPipe
   ],
   imports: [
-    AngularFireStorageModule,HttpClientModule,ProgressSpinnerModule,DropdownModule,InputTextareaModule,BrowserAnimationsModule,BrowserModule,FormsModule, AngularFireModule.initializeApp(environment.firebase),
+    AppRoutingModule,AngularFireStorageModule,HttpClientModule,ProgressSpinnerModule,DropdownModule,InputTextareaModule,BrowserAnimationsModule,BrowserModule,FormsModule, AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // for database
   ],
   providers: [UploaderService,AddVideoService,FetchAllDataService],

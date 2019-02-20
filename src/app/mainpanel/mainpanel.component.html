@@ -2,10 +2,26 @@
 Your Dashboard looks like ....
 
 <div>
-<div class="row">
-  <div class="col-md-3" *ngFor="let item of allData|async">
-    {{item|json}}
+  Search for videos of type : 
+  <p-dropdown (onChange)="filterData()" [options]="uniqueCategory" [(ngModel)]="selectedCategory" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+
+</div>
+<br><br>
+<div>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let item of allData">
+      <div class="card">
+          <div>
+              <iframe width="100%" height="100%" frameBorder="0" id="iframeId" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.videoURL)" allowfullscreen="false"></iframe>
+            </div>
+          <div class="container">
+            <h4><b>{{item.categoryType.name}}</b></h4> 
+            <p>{{item.description}}</p> 
+          </div>
+        </div>
+
+    </div>
   </div>
 </div>
-</div>
-<app-uploader></app-uploader>
+
+<!-- <app-uploader></app-uploader> -->
