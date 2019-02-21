@@ -1,29 +1,100 @@
 <h1>Hi {{uploadedBy}},</h1>
-Your Dashboard looks like ....
+<h3>Your Dashboard looks like ....</h3>
 
 <div>
-  Search for videos of type : 
-  <p-dropdown (onChange)="filterData()" [options]="uniqueCategory" [(ngModel)]="selectedCategory" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
-
+  <h4>Search for videos of type :
+    <p-dropdown (onChange)="filterData()" [options]="uniqueCategory" [(ngModel)]="selectedCategory" placeholder="Select a Category"
+      optionLabel="name" [showClear]="true"></p-dropdown>
+  </h4>
 </div>
-<button (click)="logout()">Logout</button>
-<button (click)="addVideos()">ADD VIDEOS</button>
+<button (click)="logout()" class="btn btn-danger" style="margin: 12px;">Logout</button>
+<button (click)="addVideos()" class="btn btn-success" style="margin: 12px;">ADD VIDEOS</button>
 <br><br>
 <div>
   <div class="row">
     <div class="col-md-3" *ngFor="let item of allData">
       <div class="card">
-          <div>
-              <iframe width="100%" height="100%" frameBorder="0" id="iframeId" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.videoURL)" allowfullscreen="false"></iframe>
-            </div>
-          <div class="container">
-            <h4><b>{{item.categoryType.name}}</b></h4> 
-            <p>{{item.description}}</p> 
+        <div>
+          <iframe width="100%" height="100%" frameBorder="0" id="iframeId" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.videoURL)"
+            allowfullscreen="false"></iframe>
+        </div>
+        <div class="container">
+          <h4><b>{{item.categoryType.name}}</b></h4>
+          <p>{{item.description}}</p>
+          <div class="row">
+            <button (click)="editVideo(item);triggeredit=!triggeredit" class="col-md-6 btn btn-primary" [hidden]="item.uploadedBy!=uploadedByEmail">Edit</button>
+            <button (click)="watchVideo(item);triggerModal=!triggerModal" class="col-md-6 btn btn-warning">Watch</button>
           </div>
         </div>
-
+      </div>
     </div>
   </div>
 </div>
+<!-- //watching -->
+<div *ngIf="triggerModal" class="customPopUp">
+  <div class="row">
+    <h3 style="    margin-left: 37%;">{{clickedWatch.categoryType.name}}</h3>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <iframe width="100%" height="100%" frameBorder="0" id="iframeId" [src]="sanitizer.bypassSecurityTrustResourceUrl(clickedWatch.videoURL)"
+        allowfullscreen="false"></iframe>
+    </div>
+    <div class="col-md-6">
+      <strong>Description :</strong>
+      <br>
+      {{clickedWatch.description}}
+    </div>
+  </div>
+  <div class="row" style="float: right;margin: 12px;">
+    <button (click)="triggerModal=false" class="btn btn-danger">CLOSE</button>
+  </div>
+</div>
 
-<!-- <app-uploader></app-uploader> -->
+<!-- //edited  -->
+<div *ngIf="triggeredit" class="customPopUp">
+  <div class="row">
+    <h3 style="margin-left: 37%;">Edit Mode </h3>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="!showUpload">
+        <iframe width="100%" height="100%" frameBorder="0" id="iframeId" [src]="sanitizer.bypassSecurityTrustResourceUrl(edited.videoURL)"
+          allowfullscreen="false"></iframe>
+      </div>
+      <div>
+        <div class="upload-btn-wrapper" *ngIf="showUpload">
+          <button class="btnn">Click to upload video </button>
+          <input type="file" name="myfile" accept="video/*" (change)="upload($event)" />
+        </div>
+      </div>
+      
+      <!-- <div *ngIf="uploaderService.showUpload">
+        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+        <br>
+        <div style="    position: absolute;
+          left: 47%;
+          top: 46%;z-index: 1;">{{uploaderService.allPercentage|async}}%</div>
+      </div> -->
+      <br>
+      <strong>
+        Wanna remove video?<p (click)="showUpload=!showUpload" style="    display: contents;">Yes</p>|<p
+          (click)="showUpload=!showUpload" style="    display: contents;">No</p>
+      </strong>
+    </div>
+    <div class="col-md-6">
+      <strong>Category</strong>
+      <p-dropdown (onChange)="filterData()" [options]="categories" [(ngModel)]="edited.categoryType" placeholder="Select a Category"
+        optionLabel="name" [showClear]="true"></p-dropdown>
+      <br>change
+      <strong>Description :</strong>
+      <br>
+      <textarea rows="7" cols="40" pInputTextarea autoResize="autoResize" [(ngModel)]="edited.description"></textarea>
+    </div>
+  </div>
+  <div class="row" style="float: right;margin: 12px;">
+    <button (click)="updateVideo();triggeredit=false" class="btn btn-danger">DONE</button>
+  </div>
+</div>

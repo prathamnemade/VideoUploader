@@ -18,6 +18,10 @@
     right: 0;
     left: 0;
 }
+
+:host ::ng-deep p-progressspinner div.ui-progress-spinner-svg{
+  z-index: 1;
+}
 .alignIcon{
     margin: auto;
     position: absolute;
@@ -75,7 +79,7 @@
   .eachName{
     position: absolute;
     right: 40%;
-    top: 35%;
+    top: 40%;
     font-size: 9px;
     z-index: 1;
   }
@@ -83,4 +87,17 @@
     overflow-y: scroll;
     max-height: 350px;
   }
+  :host ::ng-deep p-dropdown div.ui-dropdown-items-wrapper{
+    background: #e5e5e5;
+}
+
+:host ::ng-deep p-dropdown div.ui-dropdown{
+    width: 320px !important;
+    background: #cccccc;
+
+}
+
+:host ::ng-deep p-dropdown div.ui-dropdown-items-wrapper:hover ul li:hover{
+    background: white;
+}
  

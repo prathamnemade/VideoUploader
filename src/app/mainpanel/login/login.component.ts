@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     this.fetchLoginDataService.getAllData('/register').subscribe(x => {
       for (let i = 0; i < x.length; i++) {
         if (data.email == x[i].email && data.password == x[i].password) {
-          sessionStorage.setItem('userEmail',data.email)
-          sessionStorage.setItem('userName',data.name)
+          sessionStorage.setItem('userEmail',x[i].email)
+          sessionStorage.setItem('userName',x[i].username)
           this.router.navigate(['/dashboard']);
         }
       }

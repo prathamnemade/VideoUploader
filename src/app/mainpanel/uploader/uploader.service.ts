@@ -8,6 +8,7 @@ import { finalize } from 'rxjs/operators';
 import { AddVideoService } from './addVideo.service';
 import { combineLatest } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +33,7 @@ export class UploaderService {
   currentSessionAddedVideosURL: any = []
   uploadedBy=""
   // Inject AngularFireDatabase Dependency in Constructor
-  constructor(private db: AngularFireDatabase, private afStorage: AngularFireStorage, private addVideoService: AddVideoService) { 
+  constructor(private router:Router,private db: AngularFireDatabase, private afStorage: AngularFireStorage, private addVideoService: AddVideoService) { 
     this.uploadedBy=sessionStorage.getItem('userName')+"|"+sessionStorage.getItem('userEmail')
   }
   upload(event) {
@@ -92,7 +93,6 @@ export class UploaderService {
         videoURL: this.videoURL[i],
         description: this.videoDescription,
         categoryType: this.selectCategory,
-        thumbnailImage: "thumb",
         videoId: this.id[i]
       })
 
@@ -107,35 +107,10 @@ export class UploaderService {
         }
       }
     })
+    this.router.navigate(['/dashboard']);
 
 
   }
 
-  // generateThumbnail(event) {
-  //   console.warn("event",event);
-
-  //   // console.warn(thumbnail);
-
-  //   // var canvas = document.createElement('canvas');
-  //   // canvas.width = 640;
-  //   // canvas.height = 480;
-  //   // var context = canvas.getContext('2d');
-  //   // var img = new Image();
-  //   // context.drawImage(img, 0, 0, canvas.width, canvas.height);
-  //   // var dataURI = canvas.toDataURL('image/jpeg');
-  //   // console.warn("daya", dataURI);
-  //   var cmd = ffmpeg('/tmp/video.avi')
-  //   .setFfmpegPath(ffmpeg_static.path)
-  //   .videoBitrate(1024)
-  //   .videoCodec('divx')
-  //   .format('avi')
-  //   .on('end', () => {
-  //     // ...
-  //   })
-  //   .on('error', err => {
-  //     console.error(err);
-  //   })
-  //   .save('/tmp/file-out.avi');
-  // }
 
 }

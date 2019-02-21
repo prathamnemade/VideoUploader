@@ -4,5 +4,4 @@ export interface videoUploader{
     videoURL:string;
     description:string;
     categoryType:string;
-    thumbnailImage:string;
 }
