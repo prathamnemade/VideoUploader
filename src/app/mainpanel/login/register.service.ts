@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
 
 @Injectable()
-export class AddVideoService {
+export class RegisterService {
 
-    private basePath = '/addVideo';
+    private basePath = '/register';
     constructor(private db: AngularFireDatabase) { }
 
-    addVideo(data) {
+    register(data) {
         const obj = this.db.database.ref(this.basePath);
         obj.push(data);
         console.log('Success');
-    }
-    getAllData(): Observable<any[]> {
-        return this.db.list(this.basePath).valueChanges();
     }
 }

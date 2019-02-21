@@ -71,3 +71,16 @@
     width: 1px;
     z-index: -1;
   }
+
+  .eachName{
+    position: absolute;
+    right: 40%;
+    top: 35%;
+    font-size: 9px;
+    z-index: 1;
+  }
+  .leftPanel{
+    overflow-y: scroll;
+    max-height: 350px;
+  }
+ 

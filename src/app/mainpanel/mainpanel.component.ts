@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchAllDataService } from './fetchAllData.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mainpanel',
@@ -8,8 +9,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./mainpanel.component.css']
 })
 export class MainpanelComponent implements OnInit {
-
-  constructor(private fetchAllDataService: FetchAllDataService, public sanitizer: DomSanitizer) { }
+  uploadedBy: string = "";
+  constructor(private router: Router, private fetchAllDataService: FetchAllDataService, public sanitizer: DomSanitizer) {
+    this.uploadedBy = sessionStorage.getItem('userName') 
+  }
 
   allData: any = [];
   private basePath = '/addVideo';
@@ -44,5 +47,13 @@ export class MainpanelComponent implements OnInit {
         this.allData = z;
       })
     }
+  }
+  logout() {
+    sessionStorage.setItem('userEmail', '')
+    sessionStorage.setItem('userName', '')
+    this.router.navigate(['/login']);
+  }
+  addVideos() {
+    this.router.navigate(['/addVideo'])
   }
 }

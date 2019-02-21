@@ -1,4 +1,4 @@
-<h1>Hi sexy,</h1>
+<h1>Hi {{uploadedBy}},</h1>
 Your Dashboard looks like ....
 
 <div>
@@ -6,6 +6,8 @@ Your Dashboard looks like ....
   <p-dropdown (onChange)="filterData()" [options]="uniqueCategory" [(ngModel)]="selectedCategory" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
 
 </div>
+<button (click)="logout()">Logout</button>
+<button (click)="addVideos()">ADD VIDEOS</button>
 <br><br>
 <div>
   <div class="row">
