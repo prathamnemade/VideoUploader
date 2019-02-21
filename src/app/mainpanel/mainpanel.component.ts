@@ -124,7 +124,7 @@ export class MainpanelComponent implements OnInit {
     this.fetchAllDataService.getAllData(this.basePath).subscribe(z => {
       for (let i = 0; i < z.length; i++) {
         if (z[i].videoURL == this.dataToBeReplaced.videoURL) {
-          this.af.object('/addVideo')
+          this.af.object('/addVideo/' + z[i].$key)
             .update({
               uploadedBy: sessionStorage.getItem('userEmail'),
               videoMetadata: this.metaData,
@@ -133,6 +133,8 @@ export class MainpanelComponent implements OnInit {
               categoryType: this.edited.categoryType,
               videoId: this.id
             });
+
+          // this.af.object('/addVideo/' + z[i].$key).remove();
 
         }
 

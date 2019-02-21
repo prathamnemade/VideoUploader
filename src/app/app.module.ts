@@ -8,7 +8,7 @@ import { environment } from '../environment';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -33,7 +33,7 @@ import { FetchLoginDataService } from './mainpanel/login/fetchLoginData.service'
     ReactiveFormsModule, AppRoutingModule, AngularFireStorageModule, HttpClientModule, ProgressSpinnerModule, DropdownModule, InputTextareaModule, BrowserAnimationsModule, BrowserModule, FormsModule, AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // for database
   ],
-  providers: [UploaderService, AddVideoService, FetchAllDataService,LoginService,RegisterService,FetchLoginDataService],
+  providers: [AngularFireDatabase,UploaderService, AddVideoService, FetchAllDataService,LoginService,RegisterService,FetchLoginDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

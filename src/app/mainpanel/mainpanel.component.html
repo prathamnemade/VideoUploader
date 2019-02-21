@@ -70,14 +70,14 @@
           <input type="file" name="myfile" accept="video/*" (change)="upload($event)" />
         </div>
       </div>
-      
-      <!-- <div *ngIf="uploaderService.showUpload">
+
+      <div *ngIf="uploadProgress>1 && uploadProgress<=100">
         <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
         <br>
         <div style="    position: absolute;
           left: 47%;
-          top: 46%;z-index: 1;">{{uploaderService.allPercentage|async}}%</div>
-      </div> -->
+          top: 46%;z-index: 1;">{{uploadProgress|async|round}}%</div>
+      </div>
       <br>
       <strong>
         Wanna remove video?<p (click)="showUpload=!showUpload" style="    display: contents;">Yes</p>|<p
